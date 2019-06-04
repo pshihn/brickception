@@ -98,15 +98,8 @@ export class Game implements GameWindow {
     ball.x = Math.round(this.model.width / 2);
     ball.y = 10 + this.config!.rowCount * (this.config!.brickHeight + this.config!.brickGap);
     ball.dy = baseSpeed;
-    ball.dx = Math.round(Math.random() * baseSpeed) - (baseSpeed * 0.5);
-    if (Math.abs(ball.dx) < 0.2) {
-      ball.dx = 0.2 * (Math.random() > 0.5 ? -1 : 1);
-    }
+    ball.dx = (0.2 + Math.random() * 0.2) * baseSpeed * (Math.random() > 0.5 ? -1 : 1);
     this.baseSpeed = baseSpeed;
-  }
-
-  private get maxSpeed(): number {
-    return 1.5 * this.baseSpeed;
   }
 
   private ensureWindowSize() {
@@ -166,8 +159,14 @@ export class Game implements GameWindow {
         // paddle collision
         ball.dy = -ball.dy;
         const absDx = Math.abs(ball.dx);
-        const newDx = Math.min(this.maxSpeed, (1.1 + (newX - (paddle.x + paddle.width / 2)) / paddle.width) * (absDx < 0.15 ? (absDx + Math.random() * 0.5 * this.baseSpeed) : absDx));
-        ball.dx = dxDirection * newDx;
+        const pbRatio = (newX - (paddle.x + paddle.width / 2)) / paddle.width;
+        const max = Math.min(1.4 * this.baseSpeed, 1.4 * absDx);
+        const min = Math.max(0.2 * this.baseSpeed, 0.6 * absDx);
+        if (pbRatio > 0) {
+          ball.dx = dxDirection * (2 * (max - absDx) * pbRatio + absDx);
+        } else if (pbRatio < 0) {
+          ball.dx = dxDirection * (2 * (absDx - min) * pbRatio + absDx);
+        }
         newY = paddle.y - ball.radius;
       } else if (newY > this.model.height - ball.radius) {
         return false;

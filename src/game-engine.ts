@@ -5,7 +5,7 @@ import { SetStateDetail } from './core';
 
 const BALL_RADIUS = 8;
 const BASE_BALL_SPEED = 4;
-const BRICK_W = 260;
+const BRICK_W = 60;
 const BRICK_H = 20;
 const BRICK_GAP = 4;
 const ROWS = 4;
