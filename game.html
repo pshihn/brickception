@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>Brickception</title>
+  <meta name="description" content="....">
+</head>
+
+<body>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+      overflow: hidden;
+      background: #263238;
+      color: white;
+    }
+
+    #shell {
+      position: relative;
+      height: 100vh;
+    }
+
+    canvas {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: 0 0 2px rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      transition: opacity 0.28s ease;
+    }
+
+    #overlay {
+      position: absolute;
+      padding: 16px;
+      text-align: center;
+      left: 0;
+      right: 0;
+      top: 0;
+      color: white;
+      font-size: 60px;
+      font-weight: bold;
+      text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+  </style>
+  <div id="shell">
+    <canvas id="brickCanvas"></canvas>
+    <canvas id="ballCanvas"></canvas>
+  </div>
+  <div id="overlay"></div>
+
+  <script type="module" async src="bin/app.js"></script>
+
+</body>
+
+</html>

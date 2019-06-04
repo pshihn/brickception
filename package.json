@@ -1,0 +1,30 @@
+{
+  "name": "brickception",
+  "version": "0.1.0",
+  "description": "bricks game with two windows",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pshihn/brickception.git"
+  },
+  "keywords": [
+    "bricks",
+    "game"
+  ],
+  "author": "Preet Shihn <preetshihn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pshihn/brickception/issues"
+  },
+  "homepage": "https://github.com/pshihn/brickception#readme",
+  "devDependencies": {
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "windtalk": "^1.1.1"
+  }
+}
