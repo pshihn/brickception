@@ -4,6 +4,7 @@
   "description": "bricks game with two windows",
   "main": "index.js",
   "scripts": {
+    "build": "tsc && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,9 @@
   },
   "homepage": "https://github.com/pshihn/brickception#readme",
   "devDependencies": {
+    "rollup": "^1.14.2",
+    "rollup-plugin-node-resolve": "^5.0.1",
+    "rollup-plugin-terser": "^5.0.0",
     "tslint": "^5.16.0",
     "typescript": "^3.4.5"
   },
