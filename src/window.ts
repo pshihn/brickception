@@ -1,11 +1,4 @@
-import { GameState, GameConfig } from './model';
-
-export interface PaddlePosition {
-  x: number;
-  y: number;
-  width: number;
-  xr: number;
-}
+import { GameState, GameConfig, PaddlePosition } from './model';
 
 export interface BaseWindow {
   ready(): void;

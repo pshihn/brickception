@@ -1,7 +1,6 @@
-import { BaseWindow, GameWindow, PaddlePosition } from './window';
-import { GameState } from './model';
+import { BaseWindow, GameWindow } from './window';
+import { GameState, PaddlePosition } from './model';
 import { link, expose } from 'windtalk';
-import { SetStateDetail } from './core';
 
 const BALL_RADIUS = 8;
 const BASE_BALL_SPEED = 4;
@@ -17,6 +16,13 @@ interface GameWrapper {
 }
 
 const winArgs = 'menubar=no,toolbar=no,location=no,personalbar=no,status=no,dependent=yes,minimizable=no,resizable=no,scrollbars=no';
+
+export type State = 'home' | 'running' | 'over' | 'error';
+
+export interface SetStateDetail {
+  state: State;
+  error?: Error;
+}
 
 export interface GameListener {
   appStateChanged(state: SetStateDetail): void;

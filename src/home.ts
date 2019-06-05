@@ -1,5 +1,4 @@
-import { GameEngine, GameListener } from './game-engine.js';
-import { State, SetStateDetail } from './core.js';
+import { GameEngine, GameListener, State, SetStateDetail } from './game-engine.js';
 import { GameState } from './model.js';
 import { $, setv, store } from './utils.js';
 

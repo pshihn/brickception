@@ -20,6 +20,13 @@ export interface Paddle {
   height: number;
 }
 
+export interface PaddlePosition {
+  x: number;
+  y: number;
+  width: number;
+  xr: number;
+}
+
 export interface Model {
   bricks: Brick[];
   ball: Ball;
