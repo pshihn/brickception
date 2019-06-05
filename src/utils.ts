@@ -1,3 +1,11 @@
+export function $(id: string): HTMLElement {
+  return document.getElementById(id)!;
+}
+
+export function setv(node: HTMLElement, text: string | number) {
+  node.textContent = `${text}`;
+}
+
 export const store = {
   get<T>(key: string): T | null {
     if (!key) return null;

@@ -1,5 +1,6 @@
-import { Model, Ball, Paddle, GameState, Brick, GameConfig } from './model';
-import { GameWindow, BaseWindow } from './window';
+import { Model, Ball, Paddle, GameState, Brick, GameConfig } from './model.js';
+import { GameWindow, BaseWindow } from './window.js';
+import { $ } from './utils.js';
 import { link, expose } from 'windtalk';
 
 export class Game implements GameWindow {
@@ -23,6 +24,7 @@ export class Game implements GameWindow {
     this.ballCanvas = ballCanvas;
     this.root = link(window.opener);
     this.gameState = { level: 1, livesLeft: 5, score: 0 };
+    // expose the GameWindow interface to the base engine window 
     expose(this);
   }
 
@@ -102,6 +104,7 @@ export class Game implements GameWindow {
     this.baseSpeed = baseSpeed;
   }
 
+  // This is to ensure that if the user resizes the window, the size is restored
   private ensureWindowSize() {
     if (this.refWinHeight && this.refWinWidth && (!this.pendingWindowResize)) {
       if (this.refWinWidth !== window.outerWidth || this.refWinHeight !== window.outerHeight) {
@@ -114,6 +117,8 @@ export class Game implements GameWindow {
     }
   }
 
+  // Update ball and brick state
+  // i.e. detect collisions and update positions
   private update(): boolean {
     const ball = this.model.ball;
     const paddle = this.model.paddle;
@@ -179,17 +184,17 @@ export class Game implements GameWindow {
     return true;
   }
 
+
+  // Next frame
   private prevDrawTime = 0;
   private frameCount = 0;
   private async draw(renderNext: boolean): Promise<void> {
+    // calculate frame rate
     this.frameCount++;
     const now = performance.now();
     if (this.prevDrawTime) {
       if ((now - this.prevDrawTime) >= 1000) {
         this.root.setFps(this.frameCount, this.config!.paddleWindow);
-        // if (this.frameCount < 60) {
-        //   console.log('frame rate', this.frameCount);
-        // }
         this.frameCount = 0;
         this.prevDrawTime = now;
       }
@@ -198,6 +203,7 @@ export class Game implements GameWindow {
       this.prevDrawTime = now;
     }
 
+    // restore window size
     this.ensureWindowSize();
 
     // update paddle
@@ -211,10 +217,10 @@ export class Game implements GameWindow {
       paddle.width = pp.width;
     }
 
-
     const bl = this.bricksLeft;
     const alive = this.update();
     this.drawBallCanvas();
+    // draw bricks only if brick state has changed
     if (!this.bricksDrawnOnce) {
       this.drawBricks();
       this.bricksDrawnOnce = true;
@@ -297,7 +303,7 @@ export class Game implements GameWindow {
 
   setLabel(value: string): void {
     if (!this.overlay) {
-      this.overlay = document.getElementById('overlay') as HTMLDivElement;
+      this.overlay = $('overlay') as HTMLDivElement;
     }
     if (value) {
       this.overlay.textContent = value;

@@ -1,18 +1,10 @@
-import { GameEngine, GameListener } from './game-engine';
-import { State, SetStateDetail } from './core';
-import { GameState } from './model';
-import { store } from './store';
+import { GameEngine, GameListener } from './game-engine.js';
+import { State, SetStateDetail } from './core.js';
+import { GameState } from './model.js';
+import { $, setv, store } from './utils.js';
 
 interface StoredData {
   hiscore: number;
-}
-
-function $(id: string): HTMLElement {
-  return document.getElementById(id)!;
-}
-
-function setv(node: HTMLElement, text: string | number) {
-  node.textContent = `${text}`;
 }
 
 const mainView = document.querySelector('main')!;
