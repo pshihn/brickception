@@ -78,13 +78,11 @@ class HomeApp implements GameListener {
             if (!this.error.message) {
               this.error.message = 'Ooops! Something went wrong. Try again.';
             }
-            window.alert(this.error.message);
-          } else {
-            this.setState('home');
+            setTimeout(() => {
+              window.alert(this.error!.message);
+            }, 1000);
           }
-          stopButton.classList.add('hidden');
-          homeButton.classList.remove('hidden');
-          replayButton.classList.remove('hidden');
+          this.setState('home');
           break;
         case 'over':
           const score = this.engine.gameState.score;

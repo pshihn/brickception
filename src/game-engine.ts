@@ -70,7 +70,12 @@ export class GameEngine implements BaseWindow {
       w1.addEventListener('beforeunload', () => this.gameOver());
       w2.addEventListener('beforeunload', () => this.gameOver());
     } else {
-      this.closeWindows();
+      if (w1) {
+        w1.close();
+      }
+      if (w2) {
+        w2.close();
+      }
       throw new Error('Failed to launch game windows. Ensure that popups are enabled for this site.');
     }
   }
