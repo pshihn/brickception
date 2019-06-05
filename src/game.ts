@@ -18,6 +18,7 @@ export class Game implements GameWindow {
   private refWinHeight = 0;
   private pendingWindowResize = false;
   private baseSpeed = 1;
+  private lastUpdated: number = 0;
 
   constructor(brickCanvas: HTMLCanvasElement, ballCanvas: HTMLCanvasElement) {
     this.brickCanvas = brickCanvas;
@@ -102,6 +103,7 @@ export class Game implements GameWindow {
     ball.dy = baseSpeed;
     ball.dx = (0.2 + Math.random() * 0.2) * baseSpeed * (Math.random() > 0.5 ? -1 : 1);
     this.baseSpeed = baseSpeed;
+    this.lastUpdated = 0;
   }
 
   // This is to ensure that if the user resizes the window, the size is restored
@@ -117,13 +119,24 @@ export class Game implements GameWindow {
     }
   }
 
+  private now(): number {
+    return (performance && performance.now) ? performance.now() : Date.now();
+  }
+
   // Update ball and brick state
   // i.e. detect collisions and update positions
   private update(): boolean {
     const ball = this.model.ball;
     const paddle = this.model.paddle;
-    const newX = ball.x + ball.dx;
-    let newY = ball.y + ball.dy;
+    const now = this.now();
+    let speedGain = 1;
+    const dt = now - this.lastUpdated;
+    if (this.lastUpdated > 0 && dt < 1000) {
+      speedGain = 60 * dt / 1000;
+    }
+    const newX = ball.x + ball.dx * speedGain;
+    let newY = ball.y + ball.dy * speedGain;
+    this.lastUpdated = now;
 
     // collision detection
     let collisionDirection = 0;
