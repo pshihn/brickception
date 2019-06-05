@@ -186,23 +186,7 @@ export class Game implements GameWindow {
 
 
   // Next frame
-  private prevDrawTime = 0;
-  private frameCount = 0;
   private async draw(renderNext: boolean): Promise<void> {
-    // calculate frame rate
-    this.frameCount++;
-    const now = performance.now();
-    if (this.prevDrawTime) {
-      if ((now - this.prevDrawTime) >= 1000) {
-        this.root.setFps(this.frameCount, this.config!.paddleWindow);
-        this.frameCount = 0;
-        this.prevDrawTime = now;
-      }
-    } else {
-      this.frameCount = 0;
-      this.prevDrawTime = now;
-    }
-
     // restore window size
     this.ensureWindowSize();
 

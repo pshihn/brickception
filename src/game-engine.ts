@@ -216,14 +216,6 @@ export class GameEngine implements BaseWindow {
     return { x: 0, y: 0, xr: 0, width: 1 };
   }
 
-  setFps(fps: number, paddleView: boolean): void {
-    if (paddleView) {
-      document.getElementById('fps2')!.textContent = `${fps} fps`;
-    } else {
-      document.getElementById('fps')!.textContent = `${fps} fps`;
-    }
-  }
-
   gameOver() {
     this.gameState.livesLeft = 0;
     this.closeWindows();

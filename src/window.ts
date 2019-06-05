@@ -5,7 +5,6 @@ export interface BaseWindow {
   died(): void;
   hit(bricksLeft: boolean): void;
   getPaddlePosition(): Promise<PaddlePosition>;
-  setFps(fps: number, paddleView: boolean): void;
 }
 
 export interface GameWindow {
