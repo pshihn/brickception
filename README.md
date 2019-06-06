@@ -1,6 +1,6 @@
 ![Brickception logo](https://brickception.xyz/media/logo.jpg)
 
-# brickception
+# Brickception
 A fun take on the classic bricks breakout game with popup windows!
 
 [Play it here](https://brickception.xyz/)
