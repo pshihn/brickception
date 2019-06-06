@@ -91,7 +91,6 @@ export class GameEngine implements BaseWindow {
     }
     const w = window.open('./game.html', name, `${winArgs},top=${top},left=${left},width=${width},height=${height}`);
     if (w) {
-      w.moveTo(left, top);
       w.focus();
     }
     return w;
